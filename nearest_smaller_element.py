@@ -45,3 +45,29 @@ class Solution:
                     i = i + 1
                     j = len(stack) - 1
         return return_arr
+    #########Alternate###
+    def prevSmaller(self, A):
+        my_stack = []
+        my_ret = []
+        if len(A) == 0:
+            return []
+        for index in range(len(A)):
+            if len(my_stack) == 0:
+                my_ret.append(-1)
+                my_stack.append(A[index])
+                continue
+            if A[index] > my_stack[-1]:
+                my_ret.append(my_stack[-1])
+                my_stack.append(A[index])
+            else:
+                while A[index] <= my_stack[-1]:
+                    del my_stack[-1]
+                    if len(my_stack) == 0:
+                        my_stack.append(A[index])
+                        break
+                if A[index] > my_stack[-1]:
+                    my_ret.append(my_stack[-1])
+                    my_stack.append(A[index])
+                else:
+                    my_ret.append(-1)
+        return my_ret
